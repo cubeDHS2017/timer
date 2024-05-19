@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<script src="myScript.js" ></script>
+<html class="bg">
+   <head>
+      <title>Cube's Corner</title>
+      <link rel="icon" type="image/png" href="/assets/android-chrome-512x512.png">
+      </head> 
+   <body>
+      
+      <script src="timer.js"></script>
+
+      <style>
+
+      body {
+         padding: 3px 3px 3px 3px;
+         background-color: rgb(37, 37, 37);
+
+         width: 800px;
+
+         margin-bottom: 3px;
+         margin-left: auto;
+         margin-right: auto;
+         padding: 0px 0px 0px 0px;
+
+         border-width: 10px;
+         border-color: #5a473c;
+         border-style: dashed;
+
+         color: white;
+         font-family: Verdana;
+         font-size: 14;
+         text-align: center;
+      }
+
+      h1 {
+         animation-name: Header1;
+         animation-duration: 1.3s;
+         animation-iteration-count: infinite;
+         animation-direction: alternate;
+      }
+
+      .timer {
+         text-align: center;
+         font-size: 26px;
+         color: red;
+      }
+
+      footer {
+         color: rgb(148, 124, 92);
+      }
+
+      </style>
+
+      <main>
+         <div class="timer">
+            0:00:00
+         </div>
+
+         <button id="startBtn" onclick="startTimer()">Start</button>
+         <button id="stopBtn" onclick="stopTimer()">Stop</button>
+
+         <script>
+            let timer;
+            let seconds = 0;
+            let minutes = 0;
+            let hours = 0;
+            const timerElement = document.getElementById("timer");
+
+            function updateTimer() {
+                  seconds++;
+                  if (seconds === 60) {
+                     seconds = 0;
+                     minutes++;
+                     if (minutes === 60) {
+                        minutes = 0;
+                        hours++;
+                     }
+                  }
+                  timerElement.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            function startTimer() {
+                  console.log("startTimer")
+                  if (!timer) {
+                     timer = setInterval(updateTimer, 1000);
+                  }
+            }
+
+            function stopTimer() {
+                  console.log("stopTimer")
+                  if (timer) {
+                     clearInterval(timer);
+                     timer = null;
+                     alert(`Final time: ${timerElement.textContent}`);
+                  }
+            }
+
+         </script>
+
+      </main>
+      <footer>
+         Created by Douglas
+      </footer>
+   </body>
+</html>
