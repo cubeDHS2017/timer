@@ -39,7 +39,7 @@
          animation-direction: alternate;
       }
 
-      .timer {
+      #timer {
          text-align: center;
          font-size: 26px;
          color: red;
@@ -52,50 +52,73 @@
       </style>
 
       <main>
-         <div class="timer">
+         <div id="timer">
             0:00:00
          </div>
 
          <button id="startBtn" onclick="startTimer()">Start</button>
          <button id="stopBtn" onclick="stopTimer()">Stop</button>
 
+
          <script>
+            
             let timer;
             let seconds = 0;
             let minutes = 0;
             let hours = 0;
             const timerElement = document.getElementById("timer");
 
+
+            const keys = {
+               space: false,
+            };
+
             function updateTimer() {
-                  seconds++;
-                  if (seconds === 60) {
-                     seconds = 0;
-                     minutes++;
-                     if (minutes === 60) {
-                        minutes = 0;
-                        hours++;
-                     }
+               seconds++;
+               if (seconds === 60) {
+                  seconds = 0;
+                  minutes++;
+                  if (minutes === 60) {
+                  minutes = 0;
+                  hours++;
                   }
-                  timerElement.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+               }
+               timerElement.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
 
             function startTimer() {
-                  console.log("startTimer")
-                  if (!timer) {
-                     timer = setInterval(updateTimer, 1000);
-                  }
+               console.log("startTimer")
+               if (!timer) {
+                  timer = setInterval(updateTimer, 1000);
+               }
             }
 
             function stopTimer() {
-                  console.log("stopTimer")
-                  if (timer) {
-                     clearInterval(timer);
-                     timer = null;
-                     alert(`Final time: ${timerElement.textContent}`);
-                  }
+               console.log("stopTimer")
+               if (timer) {
+                  clearInterval(timer);
+                  timer = null;
+                  alert(`Final time: ${timerElement.textContent}`);
+               }
             }
 
+            document.addEventListener('keydown', (e) => {
+               if (e.code === 'space') {
+                  if (keys.space == false) {
+                     console.log("break");
+                     keys.space = true;
+                     startTimer();
+                  }
+                  
+                  if (keys.space == true) {
+                     keys.space = false;
+                     stopTimer();
+                  }
+               }
+            });
+
          </script>
+
 
       </main>
       <footer>
