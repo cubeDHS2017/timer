@@ -104,12 +104,8 @@
 
             document.addEventListener('keydown', (e) => {
                if (e.code === 'space') {
-                  if (keys.space == false) {
-                     console.log("break");
-                     keys.space = true;
-                     startTimer();
-                  }
-                  
+                  console.log("space has been pressed")
+
                   if (keys.space == true) {
                      keys.space = false;
                      stopTimer();
