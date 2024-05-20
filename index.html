@@ -102,17 +102,21 @@
                }
             }
 
+            
             document.addEventListener('keydown', (e) => {
-               if (e.code === 'space') {
-                  console.log("space has been pressed")
-
-                  if (keys.space == true) {
+               if (e.code === 'Space') {
+                  if (keys.space == false) {
+                     console.log("break");
+                     keys.space = true;
+                     startTimer();
+                  } else {
                      keys.space = false;
                      stopTimer();
-                  }
-               }
+                  };
+               };
             });
 
+            
          </script>
 
 
